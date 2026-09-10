@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { Category } from "../../types/product";
 import { ShoppingBag, Search, Menu, X } from "lucide-react";
 import { Button } from "../ui/Button";
+import logoImg from "../../assets/images/logo.png"
 
 const catogories: Category[] = [
   "Cosmetics",
@@ -15,11 +16,11 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-rose-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           <div className="flex items-center gap-2">
-            <span className="text-2xl font-black bg-linear-to-r from-rose-500 to-purple-600 bg-clip-text text-transparent cursor-pointer">
-              StarShop ✨
-            </span>
+            <a href="/" className="flex items-center gap-2">
+            <img src={logoImg} alt="" className="h-19 w-auto object-contain p-1 transition-transform duration-300 hover:scale-110" />
+            </a>
           </div>
 
           <nav className="hidden md:flex items-center gap-6">
@@ -43,7 +44,7 @@ export function Navbar() {
               <span className="absolute top-1 right-1 bg-rose-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">2</span>
             </button>
 
-            <Button variant="primary" className="cursor-pointer hidden sm:inline-flex text-xs py-1.5 px-3">Sign in / Login</Button>
+            <Button size="sm" className="cursor-pointer hidden sm:inline-flex">Sign in / Login</Button>
 
             <button onClick={() => setIsOpen(!isOpen)} className="md:hidden p-2 text-gray-600 cursor-pointer">
               {isOpen ? <X size={22} /> : <Menu size={22} />}
