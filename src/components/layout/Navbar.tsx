@@ -44,7 +44,7 @@ export function Navbar() {
               <span className="absolute top-1 right-1 bg-rose-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">2</span>
             </button>
 
-            <Button size="sm" className="cursor-pointer hidden sm:inline-flex">Sign in / Login</Button>
+            <Button size="sm" className="hidden sm:inline-flex">Sign in / Login</Button>
 
             <button onClick={() => setIsOpen(!isOpen)} className="md:hidden p-2 text-gray-600 cursor-pointer">
               {isOpen ? <X size={22} /> : <Menu size={22} />}

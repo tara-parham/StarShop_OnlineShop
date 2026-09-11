@@ -1,5 +1,6 @@
 import { Categories } from "./components/home/Categories";
 import Hero from "./components/home/Hero";
+import { Footer } from "./components/layout/Footer";
 import { Navbar } from "./components/layout/Navbar";
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
         <Hero />
         <Categories />
       </main>
+      <Footer />
     </div>
       
   );
