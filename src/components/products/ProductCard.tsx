@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import type { Product } from "../../types/product";
 import { Button } from "../ui/Button";
 
@@ -9,11 +10,13 @@ export function ProductCard({ product }: ProductCardProps) {
   return (
     <div className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer">
       <div className="aspect-square relative overflow-hidden bg-gray-100">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
+        <Link to={`/products/${product.id}`}>
+          <img
+            src={product.image}
+            alt={product.name}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        </Link>
         <span className="absolute right-3 top-3 rounded-full bg-amber-500/50 px-2.5 py-1 text-sm font-medium text-gray-700 backdrop-blur-md">
           {product.category}
         </span>
