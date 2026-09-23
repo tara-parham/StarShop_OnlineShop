@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
 import type { Product } from "../../types/product";
 import { Button } from "../ui/Button";
+import { useCart } from "../../context/CartContext";
 
 interface ProductCardProps {
   product: Product;
 }
 
 export function ProductCard({ product }: ProductCardProps) {
+  const { addToCart } = useCart();
   return (
     <div className="group flex flex-col overflow-hidden rounded-2xl bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg cursor-pointer">
       <div className="aspect-square relative overflow-hidden bg-gray-100">
@@ -36,7 +38,12 @@ export function ProductCard({ product }: ProductCardProps) {
         </div>
 
         <div className="mt-4 pt-2">
-          <Button className="w-full" disabled={!product.inStock} size="sm">
+          <Button
+            onClick={() => addToCart(product)}
+            className="w-full"
+            disabled={!product.inStock}
+            size="sm"
+          >
             {product.inStock ? "Add to Cart" : "Out of Stock"}
           </Button>
         </div>

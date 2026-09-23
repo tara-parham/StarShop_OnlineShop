@@ -14,7 +14,7 @@ export function Button({
   ...props
 }: ButtonProps) {
   const baseStyles =
-    "rounded-2xl font-medium transition-all active:scale-95 disabled:opacity-50";
+    "rounded-2xl font-medium transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed";
 
   const sizes = {
     sm: "px-3 py-1.5 text-sm",
