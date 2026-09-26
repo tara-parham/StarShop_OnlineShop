@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ProductsPage } from "./pages/ProductsPage";
 import { ProductDetailsPage } from "./pages/ProductDetailsPage";
 import { CartProvider } from "./context/CartContext";
+import { CartPage } from "./pages/CartPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
             <Route index element={<HomePage />} />
             <Route path="products" element={<ProductsPage />} />
             <Route path="products/:id" element={<ProductDetailsPage />} />
+            <Route path="cart" element={<CartPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
