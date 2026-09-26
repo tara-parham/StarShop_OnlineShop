@@ -54,7 +54,7 @@ export function CartProvider({ children }: CartProviderProps) {
     setCart((prev) =>
       prev
         .map((item) =>
-          item.id === id ? { ...item, quanity: item.quantity + delta } : item,
+          item.id === id ? { ...item, quantity: item.quantity + delta } : item,
         )
         .filter((pro) => pro.quantity > 0),
     );
