@@ -1,3 +1,5 @@
+import { formatPrice } from "../../utils/formatPrice";
+
 interface FilterProps {
   categories: string[];
   selectedCategory: string;
@@ -46,10 +48,7 @@ export function ProductsFilter({
         <div className="flex justify-between items-center mb-2 text-sm">
           <span className="font-semibold text-gray-700">Maximum price:</span>
           <span className="text-primary font-bold">
-            {maxPrice.toLocaleString("en-US", {
-              style: "currency",
-              currency: "USD",
-            })}
+            {formatPrice(maxPrice)}
           </span>
         </div>
         <input

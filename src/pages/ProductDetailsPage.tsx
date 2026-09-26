@@ -2,6 +2,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { mockData } from "../data/products";
 import { Button } from "../components/ui/Button";
 import { useCart } from "../context/CartContext";
+import { formatPrice } from "../utils/formatPrice";
 
 export function ProductDetailsPage() {
   const { id } = useParams<{ id: string }>();
@@ -70,10 +71,7 @@ export function ProductDetailsPage() {
             <div className="flex items-center justify-between mb-6">
               <span className="text-gray-500">Final Price:</span>
               <span className="text-2xl font-bold text-primary">
-                {product.price.toLocaleString("en-US", {
-                  style: "currency",
-                  currency: "USD",
-                })}
+                {formatPrice(product.price)}
               </span>
             </div>
 

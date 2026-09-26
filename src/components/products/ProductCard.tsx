@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import type { Product } from "../../types/product";
 import { Button } from "../ui/Button";
 import { useCart } from "../../context/CartContext";
+import { formatPrice } from "../../utils/formatPrice";
 
 interface ProductCardProps {
   product: Product;
@@ -28,11 +29,8 @@ export function ProductCard({ product }: ProductCardProps) {
         <h3 className="font-semibold text-gray-800">{product.name}</h3>
         <p className="text-gray-500 mt-2">{product.brand}</p>
         <div className="flex mt-3 items-center justify-between">
-          <span className="font-bold text-rose-600">
-            {product.price.toLocaleString("en-US", {
-              style: "currency",
-              currency: "USD",
-            })}
+          <span className="font-bold text-primary">
+            {formatPrice(product.price)}
           </span>
           <span className="text-sm text-amber-500">★ {product.rating}</span>
         </div>
