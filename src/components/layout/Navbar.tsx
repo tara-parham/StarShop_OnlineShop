@@ -4,6 +4,7 @@ import { ShoppingBag, Search, Menu, X } from "lucide-react";
 import { Button } from "../ui/Button";
 import logoImg from "../../assets/images/logo.png";
 import { useCart } from "../../context/CartContext";
+import { Link } from "react-router-dom";
 
 const catogories: Category[] = [
   "Cosmetics",
@@ -33,7 +34,7 @@ export function Navbar() {
             {catogories.map((cat) => (
               <a
                 key={cat}
-                className="text-sm font-medium text-gray-600 hover:text-rose-500 transition-colors"
+                className="text-sm font-medium text-gray-600 hover:text-primary transition-colors"
                 href={`#${cat.toLowerCase().replace(/\s+/g, "-")}`}
               >
                 {cat}
@@ -41,27 +42,30 @@ export function Navbar() {
             ))}
           </nav>
           <div className="flex items-center gap-4">
-            <button className="p-2 text-gray-600 hover:text-rose-500 transition-colors cursor-pointer">
-              <Search size={20} />
-            </button>
-
-            <button className="relative p-2 text-gray-600 hover:text-rose-500 transition-colors cursor-pointer">
+            <Link
+              to="/cart"
+              className="relative p-2 text-gray-600 hover:text-primary transition-colors cursor-pointer"
+            >
               <ShoppingBag size={20} />
-              <span className="absolute top-1 right-1 bg-rose-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
+              <span className="absolute top-1 right-1 bg-primary text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
                 {totalCount}
               </span>
-            </button>
+            </Link>
+            <Button variant="icon" size="lg">
+              <Search size={20} />
+            </Button>
 
             <Button size="sm" className="hidden sm:inline-flex">
               Sign in / Login
             </Button>
 
-            <button
+            <Button
+            variant="icon"
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2 text-gray-600 cursor-pointer"
+              className="md:hidden p-2"
             >
               {isOpen ? <X size={22} /> : <Menu size={22} />}
-            </button>
+            </Button>
           </div>
         </div>
       </div>
@@ -73,7 +77,7 @@ export function Navbar() {
               onClick={() => setIsOpen(!isOpen)}
               href={`#${cat}`}
               key={cat}
-              className="block py-2 text-sm font-medium text-gray-700 hover:text-rose-500"
+              className="block py-2 text-sm font-medium text-gray-700 hover:text-primary"
             >
               {cat}
             </a>
