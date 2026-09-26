@@ -17,17 +17,17 @@ export function Footer() {
             <h4 className="font-semibold text-white mb-3">Quick Access</h4>
             <ul className="space-y-2 text-gray-400 text-sm">
               <li>
-                <a href="#" className="hover:text-pink-400 transition">
+                <a href="#" className="hover:text-primary transition">
                   Home
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-pink-400 transition">
+                <a href="#" className="hover:text-primary transition">
                   Products
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-pink-400 transition">
+                <a href="#" className="hover:text-primary transition">
                   About Us
                 </a>
               </li>
@@ -38,12 +38,12 @@ export function Footer() {
             <h4 className="font-semibold text-white mb-3">Categories</h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li>
-                <a href="#" className="hover:text-pink-400 transition">
+                <a href="#" className="hover:text-primary transition">
                   Skin Care
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-pink-400 transition">
+                <a href="#" className="hover:text-primary transition">
                   Makeup / Cosmetics
                 </a>
               </li>
@@ -53,7 +53,7 @@ export function Footer() {
                 </a>
               </li>
               <li>
-                <a href="#" className="hover:text-pink-400 transition">
+                <a href="#" className="hover:text-primary transition">
                   Personal Care
                 </a>
               </li>
@@ -62,12 +62,18 @@ export function Footer() {
 
           <div>
             <h4 className="font-semibold text-white mb-3">Contact Us</h4>
-            <p className="text-sm text-gray-400">Support: support@starshop.com</p>
-            <p className="text-sm text-gray-400 mt-1">Fast Nationwide Delivery 🚀</p>
+            <p className="text-sm text-gray-400">
+              Support: support@starshop.com
+            </p>
+            <p className="text-sm text-gray-400 mt-1">
+              Fast Nationwide Delivery 🚀
+            </p>
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-10 pt-6 text-center text-sm text-gray-500">© {new Date().getFullYear()} StarShop. All rights reserved.</div>
+        <div className="border-t border-gray-800 mt-10 pt-6 text-center text-sm text-gray-500">
+          © {new Date().getFullYear()} StarShop. All rights reserved.
+        </div>
       </div>
     </footer>
   );
