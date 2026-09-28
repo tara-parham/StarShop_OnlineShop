@@ -119,11 +119,16 @@ export function CartPage() {
                 </span>
               </div>
             </div>
-            <Button className="w-full mt-6 py-3.5 shadow-lg" onClick={() => alert("Checkout feature coming soon!")}>
+            <div className="mt-6 text-center flex flex-col gap-3">
+              <Link to="/checkout" className="mt-2 bg-primary py-2 px-4 rounded-lg text-white transition-colors hover:bg-primaryHover">
               Proceed to Checkout
-            </Button>
-            <div className="mt-6 text-center">
-              <Link className="border border-primary py-2 px-4 rounded-full  text-slate-900 transition-colors hover:bg-primary hover:text-white" to="/products">Continue Shopping</Link>
+            </Link>
+              <Link
+                className="border border-primary py-2 px-4 rounded-full  text-slate-900 transition-colors hover:bg-primary hover:text-white"
+                to="/products"
+              >
+                Continue Shopping
+              </Link>
             </div>
           </div>
         </div>
