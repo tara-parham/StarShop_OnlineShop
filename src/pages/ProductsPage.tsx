@@ -1,15 +1,28 @@
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { mockData } from "../data/products";
 import { ProductsFilter } from "../components/products/ProductFilters";
 import { ProductCard } from "../components/products/ProductCard";
 
 export function ProductsPage() {
+  const [useParams] = useSearchParams();
+  const categoryFromUrl = useParams.get("Category")
+
   const [selectedCategory, setSelectedCategpry] = useState("All");
   const [maxPrice, setMaxPrice] = useState(100);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState<"defalut" | "price-asc" | "price-desc">(
     "defalut",
   );
+
+  useEffect(()=>{
+    if(categoryFromUrl){
+      setSelectedCategpry(categoryFromUrl)
+    }
+    else{
+      setSelectedCategpry("All")
+    }
+  }, [categoryFromUrl])
 
   const categories = Array.from(new Set(mockData.map((p) => p.category)));
 

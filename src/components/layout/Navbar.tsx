@@ -32,15 +32,16 @@ export function Navbar() {
 
           <nav className="hidden md:flex items-center gap-6">
             {catogories.map((cat) => (
-              <a
+              <Link
+                to={`/products?Category=${cat}`}
                 key={cat}
                 className="text-sm font-medium text-gray-600 hover:text-primary transition-colors"
-                href={`#${cat.toLowerCase().replace(/\s+/g, "-")}`}
               >
                 {cat}
-              </a>
+              </Link>
             ))}
           </nav>
+
           <div className="flex items-center gap-4">
             <Link
               to="/cart"
@@ -60,7 +61,7 @@ export function Navbar() {
             </Button>
 
             <Button
-            variant="icon"
+              variant="icon"
               onClick={() => setIsOpen(!isOpen)}
               className="md:hidden p-2"
             >
@@ -73,14 +74,13 @@ export function Navbar() {
       {isOpen && (
         <div className="md:hidden border-t border-rose-100 bg-white px-4 pt-2 pb-4 space-y-2">
           {catogories.map((cat) => (
-            <a
+            <Link to="/products"
               onClick={() => setIsOpen(!isOpen)}
-              href={`#${cat}`}
               key={cat}
               className="block py-2 text-sm font-medium text-gray-700 hover:text-primary"
             >
               {cat}
-            </a>
+            </Link>
           ))}
         </div>
       )}
