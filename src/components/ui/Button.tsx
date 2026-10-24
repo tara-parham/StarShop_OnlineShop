@@ -32,7 +32,8 @@ export function Button({
     primary:
       "bg-primary hover:bg-rose-600 hover:shadow-rose-200 text-white shadow-medium",
     secondary: "bg-purple-600 hover:bg-purple-700 text-white",
-    outline: "border-2 border-primary text-primary hover: bg-rose-50",
+    outline:
+      "border-2 border-primary text-primary bg-rose-50 hover:bg-rose-100",
     icon: "text-slate-600 hover:text-rose-600 hover:scale-105",
   };
 

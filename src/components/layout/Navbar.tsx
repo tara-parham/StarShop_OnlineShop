@@ -5,6 +5,7 @@ import { Button } from "../ui/Button";
 import logoImg from "../../assets/images/logo.png";
 import { useCart } from "../../context/CartContext";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 
 const catogories: Category[] = [
   "Cosmetics",
@@ -15,17 +16,18 @@ const catogories: Category[] = [
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [showSearch, setShowSearch] = useState(false)
-  const [searchQuery, setSearchQuery] = useState("")
+  const [showSearch, setShowSearch] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const { totalCount } = useCart();
-  const navigate = useNavigate()
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
-  function handleSearchSubmit(e:React.SubmitEvent){
+  function handleSearchSubmit(e: React.SubmitEvent) {
     e.preventDefault();
-    if(searchQuery.trim()){
-      navigate(`/products?search=${encodeURIComponent(searchQuery.trim())}`)
-      setShowSearch(false)
-      setSearchQuery("")
+    if (searchQuery.trim()) {
+      navigate(`/products?search=${encodeURIComponent(searchQuery.trim())}`);
+      setShowSearch(false);
+      setSearchQuery("");
     }
   }
   return (
@@ -65,21 +67,54 @@ export function Navbar() {
               </span>
             </Link>
             <div className="relative">
-              <Button variant="icon" size="lg" onClick={()=>setShowSearch(!showSearch)} aria-label="Search">
-              <Search size={20} />
-            </Button>
+              <Button
+                variant="icon"
+                size="lg"
+                onClick={() => setShowSearch(!showSearch)}
+                aria-label="Search"
+              >
+                <Search size={20} />
+              </Button>
 
-            {showSearch && (
-              <form onSubmit={handleSearchSubmit} className="absolute right-0 top-12 z-50 bg-white shadow-xl rounded-xl p-2 border border-rose-100 flex items-center gap-2 w-72">
-                <input type="text" placeholder="Search Products" value={searchQuery} autoFocus onChange={(e)=>setSearchQuery(e.target.value)} className="w-full px-3 py-1.5 text-sm bg-rose-50/80 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary" />
-                <Button>Go</Button>
-              </form>
-            )}
+              {showSearch && (
+                <form
+                  onSubmit={handleSearchSubmit}
+                  className="absolute right-0 top-12 z-50 bg-white shadow-xl rounded-xl p-2 border border-rose-100 flex items-center gap-2 w-72"
+                >
+                  <input
+                    type="text"
+                    placeholder="Search Products"
+                    value={searchQuery}
+                    autoFocus
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full px-3 py-1.5 text-sm bg-rose-50/80 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary"
+                  />
+                  <Button>Go</Button>
+                </form>
+              )}
             </div>
 
-            <Button size="sm" className="hidden sm:inline-flex">
-              Sign in / Login
-            </Button>
+            {user ? (
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-gray-500 font-medium">
+                  Hi, {user.name}
+                </span>
+                <Link
+                  to="/"
+                  onClick={logout}
+                  className="px-3 py-1.5 text-xs font-medium text-rose-600 bg-rose-50 hover:bg-rose-100 rounded-lg transition-colors cursor-pointer"
+                >
+                  Logout
+                </Link>
+              </div>
+            ) : (
+              <Link
+                to="/login"
+                className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-primary hover:bg-primaryHover transition-colors rounded-xl shadow-sm cursor-pointer"
+              >
+                Sign in / Login
+              </Link>
+            )}
 
             <Button
               variant="icon"
@@ -95,7 +130,8 @@ export function Navbar() {
       {isOpen && (
         <div className="md:hidden border-t border-rose-100 bg-white px-4 pt-2 pb-4 space-y-2">
           {catogories.map((cat) => (
-            <Link to="/products"
+            <Link
+              to="/products"
               onClick={() => setIsOpen(!isOpen)}
               key={cat}
               className="block py-2 text-sm font-medium text-gray-700 hover:text-primary"
