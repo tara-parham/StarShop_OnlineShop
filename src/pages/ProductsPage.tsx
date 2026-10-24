@@ -5,12 +5,13 @@ import { ProductsFilter } from "../components/products/ProductFilters";
 import { ProductCard } from "../components/products/ProductCard";
 
 export function ProductsPage() {
-  const [useParams] = useSearchParams();
-  const categoryFromUrl = useParams.get("Category")
+  const [searchParams] = useSearchParams();
+  const categoryFromUrl = searchParams.get("Category")
+  const searchFromUrl = searchParams.get("search")
 
-  const [selectedCategory, setSelectedCategpry] = useState("All");
+  const [selectedCategory, setSelectedCategpry] = useState(categoryFromUrl|| "All");
   const [maxPrice, setMaxPrice] = useState(100);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState(searchFromUrl || "");
   const [sortBy, setSortBy] = useState<"defalut" | "price-asc" | "price-desc">(
     "defalut",
   );
@@ -23,6 +24,14 @@ export function ProductsPage() {
       setSelectedCategpry("All")
     }
   }, [categoryFromUrl])
+
+  useEffect(()=>{
+    if(searchFromUrl){
+      setSearchQuery(searchFromUrl)
+    } else{
+      setSearchQuery("")
+    }
+  }, [searchFromUrl])
 
   const categories = Array.from(new Set(mockData.map((p) => p.category)));
 

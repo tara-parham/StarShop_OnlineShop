@@ -4,7 +4,7 @@ import { ShoppingBag, Search, Menu, X } from "lucide-react";
 import { Button } from "../ui/Button";
 import logoImg from "../../assets/images/logo.png";
 import { useCart } from "../../context/CartContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const catogories: Category[] = [
   "Cosmetics",
@@ -15,7 +15,19 @@ const catogories: Category[] = [
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [showSearch, setShowSearch] = useState(false)
+  const [searchQuery, setSearchQuery] = useState("")
   const { totalCount } = useCart();
+  const navigate = useNavigate()
+
+  function handleSearchSubmit(e:React.SubmitEvent){
+    e.preventDefault();
+    if(searchQuery.trim()){
+      navigate(`/products?search=${encodeURIComponent(searchQuery.trim())}`)
+      setShowSearch(false)
+      setSearchQuery("")
+    }
+  }
   return (
     <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-rose-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -52,9 +64,18 @@ export function Navbar() {
                 {totalCount}
               </span>
             </Link>
-            <Button variant="icon" size="lg">
+            <div className="relative">
+              <Button variant="icon" size="lg" onClick={()=>setShowSearch(!showSearch)} aria-label="Search">
               <Search size={20} />
             </Button>
+
+            {showSearch && (
+              <form onSubmit={handleSearchSubmit} className="absolute right-0 top-12 z-50 bg-white shadow-xl rounded-xl p-2 border border-rose-100 flex items-center gap-2 w-72">
+                <input type="text" placeholder="Search Products" value={searchQuery} autoFocus onChange={(e)=>setSearchQuery(e.target.value)} className="w-full px-3 py-1.5 text-sm bg-rose-50/80 rounded-lg focus:outline-none focus:ring-1 focus:ring-primary" />
+                <Button>Go</Button>
+              </form>
+            )}
+            </div>
 
             <Button size="sm" className="hidden sm:inline-flex">
               Sign in / Login
