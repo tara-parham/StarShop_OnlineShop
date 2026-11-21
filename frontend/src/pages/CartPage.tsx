@@ -43,7 +43,7 @@ export function CartPage() {
           {cart.map((item) => (
             <div
               key={item.id}
-              className="bg-rose-100 dark:bg-rose-950 border border-rose-950 dark:border-slate-700 rounded-xl p-4 sm:p-6 flex flex-col sm:flex-row items-center gap-4 justify-between"
+              className="bg-rose-100 dark:bg-zinc-900 border border-rose-950 dark:border-slate-700 rounded-xl p-4 sm:p-6 flex flex-col sm:flex-row items-center gap-4 justify-between"
             >
               <div className="flex items-center w-full sm:w-auto gap-4">
                 <img
@@ -52,10 +52,10 @@ export function CartPage() {
                   className="w-20 h-20 object-cover rounded-lg border border-primary"
                 />
                 <div>
-                  <h3 className="text-lg font-semibold text-slate-800">
+                  <h3 className="text-lg font-semibold text-slate-800 dark:text-white">
                     {item.name}
                   </h3>
-                  <p className="text-sm text-slate-700">
+                  <p className="text-sm text-slate-700 dark:text-white">
                     {formatPrice(item.price)} each
                   </p>
                 </div>
@@ -63,13 +63,13 @@ export function CartPage() {
 
               <div className="flex items-center justify-between w-full sm:w-auto sm:gap-6">
                 <div className="flex items-center gap-1">
-                  <Button onClick={() => updateQuantity(item.id, 1)} size="sm">
+                  <Button onClick={() => updateQuantity(item.id, 1)} size="sm" className="dark:bg-rose-900 dark:hover:bg-rose-700">
                     +
                   </Button>
                   <span className="w-8 text-center font-medium text-xl">
                     {item.quantity}
                   </span>
-                  <Button onClick={() => updateQuantity(item.id, -1)} size="sm">
+                  <Button onClick={() => updateQuantity(item.id, -1)} size="sm" className="dark:bg-rose-900 dark:hover:bg-rose-700">
                     -
                   </Button>
                 </div>
@@ -80,7 +80,7 @@ export function CartPage() {
                   </p>
                 </div>
 
-                <Button onClick={() => removeFromCart(item.id)}>
+                <Button onClick={() => removeFromCart(item.id)} className="dark:bg-rose-900 dark:hover:bg-rose-700">
                   <Trash2 size={20} strokeWidth={2} />
                 </Button>
               </div>
@@ -96,27 +96,27 @@ export function CartPage() {
             <div className="text-sm space-y-4 text-slate-600 dark:text-slate-300">
               <div className="flex justify-between">
                 <span>Subtotal</span>
-                <span className="font-semibold text-slate-800">
+                <span className="font-semibold text-slate-800 dark:text-rose-50">
                   {formatPrice(totalPrice)}
                 </span>
               </div>
               <div className="flex justify-between">
                 <span>Shipping</span>
                 <span
-                  className={`font-semibold ${shippingPrice === 0 ? "text-emerald-600" : "text-slate-800"}`}
+                  className={`font-semibold ${shippingPrice === 0 ? "text-emerald-600 dark:text-emerald-400" : "text-slate-800 dark:text-rose-50"}  `}
                 >
                   {shippingPrice === 0 ? "Free" : formatPrice(shippingPrice)}
                 </span>
               </div>
               <div className="flex justify-between">
                 <span>Estimated Tax (8%)</span>
-                <span className="font-semibold text-slate-800">
+                <span className="font-semibold text-slate-800  dark:text-rose-50">
                   {formatPrice(taxPrice)}
                 </span>
               </div>
               <div className="border-t border-slate-700 pt-4 flex justify-between text-base font-bold">
                 <span>Total</span>
-                <span className="text-slate-950 text-xl">
+                <span className="text-slate-950 text-xl  dark:text-rose-300">
                   {formatPrice(finalPrice)}
                 </span>
               </div>
