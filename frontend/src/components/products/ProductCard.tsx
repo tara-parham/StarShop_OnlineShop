@@ -3,6 +3,7 @@ import type { Product } from "../../types/product";
 import { Button } from "../ui/Button";
 import { useCart } from "../../context/CartContext";
 import { formatPrice } from "../../utils/formatPrice";
+import { FavoriteButton } from "./FavoriteButton";
 
 interface ProductCardProps {
   product: Product;
@@ -20,7 +21,8 @@ export function ProductCard({ product }: ProductCardProps) {
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         </Link>
-        <span className="absolute right-3 top-3 rounded-full bg-amber-100 dark:bg-amber-950/90 px-2.5 py-1 text-sm font-medium text-amber-900 dark:text-amber-200 backdrop-blur-md">
+        <FavoriteButton product={product} className="absolute left-3 top-3" />
+        <span className="absolute right-3 bottom-3 rounded-full bg-amber-100 dark:bg-amber-950/90 px-2.5 py-1 text-sm font-medium text-amber-900 dark:text-amber-200 backdrop-blur-md">
           {product.category}
         </span>
       </div>

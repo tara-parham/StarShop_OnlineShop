@@ -107,6 +107,26 @@ export function createApp(repository: ShopRepository, options: Options) {
     res.json(shop.product(String(req.params.id))),
   );
   app.get("/api/settings", (_req, res) => res.json(shop.settings()));
+  app.use("/api/favorites", (req, res, next) => {
+    const user = auth.user(sessionToken(req));
+    if (!user) {
+      res.status(401).json({ message: "Please sign in." });
+      return;
+    }
+    res.locals.user = user;
+    next();
+  });
+  app.get("/api/favorites", (_req, res) => {
+    res.json(shop.favorites(res.locals.user.id));
+  });
+  app.put("/api/favorites/:id", (req, res) => {
+    shop.addFavorite(res.locals.user.id, String(req.params.id));
+    res.status(204).end();
+  });
+  app.delete("/api/favorites/:id", (req, res) => {
+    shop.removeFavorite(res.locals.user.id, String(req.params.id));
+    res.status(204).end();
+  });
   app.get("/api/auth/me", (req, res) =>
     res.json({ user: auth.user(sessionToken(req)) ?? null }),
   );

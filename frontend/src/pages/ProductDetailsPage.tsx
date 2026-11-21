@@ -3,6 +3,7 @@ import { useShop, CatalogStatus } from "../context/ShopContext";
 import { Button } from "../components/ui/Button";
 import { useCart } from "../context/CartContext";
 import { formatPrice } from "../utils/formatPrice";
+import { FavoriteButton } from "../components/products/FavoriteButton";
 
 export function ProductDetailsPage() {
   const { id } = useParams<{ id: string }>();
@@ -93,6 +94,10 @@ export function ProductDetailsPage() {
               >
                 Add to Cart 🛒
               </Button>
+              <FavoriteButton
+                product={product}
+                className="shrink-0 self-center border border-gray-200 dark:border-slate-700"
+              />
             </div>
           </div>
         </div>

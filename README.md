@@ -47,6 +47,8 @@ The admin can:
 
 The storefront reads its catalog and settings from the API. Catalog requests are cached and refreshed after admin changes and when the browser regains focus. Dark mode follows the operating system until a visitor chooses a theme using the navbar toggle; the choice is saved locally.
 
+Each product card has a heart that toggles Favorites. Guest selections are saved in browser storage and added to the account on sign-in or registration. Account favorites are stored in SQLite, remain private to each user, and appear below Profile on the account page. Click a filled heart to remove a saved product. Deleted catalog products are automatically removed from favorites.
+
 ## Configuration and storage
 
 Copy `backend/.env.example` to `backend/.env` if needed. Defaults work without an env file.
@@ -89,6 +91,7 @@ npm run test:backend
 ```
 
 The backend integration test uses a temporary SQLite database and HTTP server. It covers seeding, login and session revocation, customer/admin permissions, product validation and CRUD, settings, invalid and valid uploads, persistence, and an empty catalog remaining empty after restart.
+Favorites tests also cover authenticated access, account isolation, duplicate saves, removal, persistence, current product details, and cleanup when products are deleted.
 
 ## Deployment and remaining work
 

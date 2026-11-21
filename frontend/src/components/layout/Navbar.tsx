@@ -21,7 +21,7 @@ export function Navbar() {
   const [showSearch, setShowSearch] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const { totalCount } = useCart();
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const { theme, toggleTheme } = useTheme();
   const { settings } = useShop();
@@ -110,21 +110,12 @@ export function Navbar() {
             </div>
 
             {user ? (
-              <div className="flex items-center gap-2">
-                <Link
-                  className="text-xs text-primary font-medium"
-                  to={user.role === "admin" ? "/admin" : "/dashboard"}
-                >
-                  {user.role === "admin" ? "Admin" : "Account"}
-                </Link>
-                <Link
-                  to="/"
-                  onClick={() => void logout()}
-                  className="px-3 py-1.5 text-xs font-medium text-rose-600 bg-rose-50 dark:bg-slate-900 hover:bg-rose-100 dark:hover:bg-slate-800 rounded-lg transition-colors cursor-pointer"
-                >
-                  Logout
-                </Link>
-              </div>
+              <Link
+                className="text-xs text-primary font-medium"
+                to={user.role === "admin" ? "/admin" : "/dashboard"}
+              >
+                {user.role === "admin" ? "Admin" : "Account"}
+              </Link>
             ) : (
               <Link
                 to="/login"

@@ -12,6 +12,7 @@ import { CheckoutPage } from "./pages/CheckoutPage";
 import { LoginPage } from "./pages/LoginPage";
 import { AuthProvider } from "./context/AuthContext";
 import { DashboardPage } from "./pages/DashboardPage";
+import { FavoritesProvider } from "./context/FavoritesContext";
 
 function App() {
   return (
@@ -19,20 +20,22 @@ function App() {
       <ShopProvider>
         <AuthProvider>
           <CartProvider>
-            <BrowserRouter>
-              <Routes>
-                <Route path="/" element={<MainLayout />}>
-                  <Route index element={<HomePage />} />
-                  <Route path="products" element={<ProductsPage />} />
-                  <Route path="products/:id" element={<ProductDetailsPage />} />
-                  <Route path="cart" element={<CartPage />} />
-                  <Route path="checkout" element={<CheckoutPage />} />
-                  <Route path="login" element={<LoginPage />} />
-                  <Route path="admin" element={<AdminPage />} />
-                  <Route path="dashboard" element={<DashboardPage />} />
-                </Route>
-              </Routes>
-            </BrowserRouter>
+            <FavoritesProvider>
+              <BrowserRouter>
+                <Routes>
+                  <Route path="/" element={<MainLayout />}>
+                    <Route index element={<HomePage />} />
+                    <Route path="products" element={<ProductsPage />} />
+                    <Route path="products/:id" element={<ProductDetailsPage />} />
+                    <Route path="cart" element={<CartPage />} />
+                    <Route path="checkout" element={<CheckoutPage />} />
+                    <Route path="login" element={<LoginPage />} />
+                    <Route path="admin" element={<AdminPage />} />
+                    <Route path="dashboard" element={<DashboardPage />} />
+                  </Route>
+                </Routes>
+              </BrowserRouter>
+            </FavoritesProvider>
           </CartProvider>
         </AuthProvider>
       </ShopProvider>

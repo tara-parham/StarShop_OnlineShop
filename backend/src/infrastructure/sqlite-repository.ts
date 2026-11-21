@@ -25,6 +25,10 @@ export class SqliteRepository implements ShopRepository {
       CREATE TABLE IF NOT EXISTS users (id TEXT PRIMARY KEY, email TEXT NOT NULL UNIQUE, name TEXT NOT NULL,
         role TEXT NOT NULL CHECK(role IN ('admin','customer')), passwordHash TEXT NOT NULL);
       CREATE TABLE IF NOT EXISTS sessions (tokenHash TEXT PRIMARY KEY, userId TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE, expires INTEGER NOT NULL);
+      CREATE TABLE IF NOT EXISTS favorites (
+        userId TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        productId TEXT NOT NULL REFERENCES products(id) ON DELETE CASCADE,
+        PRIMARY KEY (userId, productId));
     `);
     if (
       !this.db.prepare("SELECT version FROM migrations WHERE version = 1").get()
@@ -70,6 +74,20 @@ export class SqliteRepository implements ShopRepository {
         }
       ).value,
     );
+  }
+  favorites(userId: string) {
+    return (this.db.prepare(
+      "SELECT p.* FROM products p JOIN favorites f ON p.id = f.productId WHERE f.userId = ? ORDER BY f.rowid DESC",
+    ).all(userId) as Product[]).map((p) => ({ ...p, inStock: Boolean(p.inStock) }));
+  }
+  addFavorite(userId: string, productId: string) {
+    this.db.prepare(
+      "INSERT INTO favorites (userId, productId) VALUES (?, ?) ON CONFLICT DO NOTHING",
+    ).run(userId, productId);
+  }
+  removeFavorite(userId: string, productId: string) {
+    this.db.prepare("DELETE FROM favorites WHERE userId = ? AND productId = ?")
+      .run(userId, productId);
   }
   saveSettings(s: Settings) {
     this.db

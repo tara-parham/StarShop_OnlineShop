@@ -31,6 +31,9 @@ export interface ShopRepository {
   product(id: string): Product | undefined;
   saveProduct(product: Product): void;
   deleteProduct(id: string): boolean;
+  favorites(userId: string): Product[];
+  addFavorite(userId: string, productId: string): void;
+  removeFavorite(userId: string, productId: string): void;
   settings(): Settings;
   saveSettings(settings: Settings): void;
   account(email: string): Account | undefined;

@@ -35,6 +35,16 @@ export class ShopService {
   settings() {
     return this.repository.settings();
   }
+  favorites(userId: string) {
+    return this.repository.favorites(userId);
+  }
+  addFavorite(userId: string, productId: string) {
+    this.product(productId);
+    this.repository.addFavorite(userId, productId);
+  }
+  removeFavorite(userId: string, productId: string) {
+    this.repository.removeFavorite(userId, productId);
+  }
   saveSettings(settings: Settings) {
     this.repository.saveSettings(settings);
     return settings;
